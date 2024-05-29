@@ -2,13 +2,15 @@ import os.path
 from pageObjects.homepage import HomePage
 from utilities.customerlogger import LogGen
 import pytest
+from utilities.readProperties import ReadProperties
 
 class TestHomePage:
     logger = LogGen.loggen()
+    baseURL= ReadProperties.readBaseURL()
     @pytest.mark.sanity
     def test_homepage(self, setup):
         self.driver=setup
-        self.driver.get("https://merolagani.com/")
+        self.driver.get(self.baseURL)
         self.logger.info("Opened website")
         self.homepage= HomePage(self.driver)
         self.homepage.clickContactUs()
